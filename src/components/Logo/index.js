@@ -5,10 +5,8 @@ import "./styles.scss";
 const Logo = () => {
   return (
     <div className="Logo">
-      <Tilt>
-        <div className="LogoImage">
+      <Tilt className="LogoImage">
           <img src="/assets/images/logo.png" />
-        </div>
       </Tilt>
     </div>
   );

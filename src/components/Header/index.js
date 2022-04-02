@@ -5,10 +5,12 @@ import "./styles.scss";
 const Header = () => {
   return (
     <nav className="Header">
-      <Logo />
-      <div className="Navigation">
-        <div className="NavigationOption">Sign In</div>
-        <div className="NavigationOption">Register</div>
+      <div className="HeaderWrapper">
+        <Logo />
+        <div className="Navigation">
+          <div className="NavigationOption">Sign In</div>
+          <div className="NavigationOption">Register</div>
+        </div>
       </div>
     </nav>
   );
