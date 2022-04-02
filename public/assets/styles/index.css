@@ -1,0 +1,8 @@
+.PushContent {
+    width: 100%;
+    height: 64px;
+}
+
+body {
+    min-height: 150vh;
+}

@@ -1,0 +1,34 @@
+.Header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 64px;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 24px;
+
+  .Navigation {
+    display: flex;
+  }
+  .NavigationOption {
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: right;
+    background-color: black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: all 300ms ease;
+  }
+  .NavigationOption:first-child {
+    margin-right: 10px;
+  }
+  .NavigationOption:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
