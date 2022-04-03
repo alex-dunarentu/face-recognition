@@ -1,4 +1,15 @@
 .FaceRecognition {
     max-width: 500px;
     margin: 50px auto;
+    .FaceRecognitionWrapper {
+        position: relative;
+        .BoundingBox {
+            position: absolute;
+            box-shadow: 0 0 0 3px #1a66b8;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            cursor: pointer;
+        }
+    }
 }

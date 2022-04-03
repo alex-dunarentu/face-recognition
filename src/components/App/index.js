@@ -1,6 +1,8 @@
 import React from "react";
-import { Header, ImageLinkForm, Rank, FaceRecognition } from "../index.js";
+import { Routes, Route } from "react-router-dom";
 import Particles from "react-tsparticles";
+import { Home, Register, SignIn } from "../../pages";
+import Header from "../Header";
 
 const particlesOptions = {
   autoPlay: true,
@@ -544,10 +546,28 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      input: "",
+      input: "https://www.futurity.org/wp/wp-content/uploads/2019/10/two-people-talking-on-bench_1600.jpg",
       imageUrl: "",
+      boxes: [],
     };
   }
+
+  calculateFaceLocation = (data) => {
+    const image = document.getElementById("input-image");
+    const boxes = [];
+    const { width, height } = image;
+    console.log(data.regions);
+    data.regions.map((region) => {
+      const { top_row, left_col, bottom_row, right_col } = region.region_info.bounding_box;
+      boxes.push({
+        leftCol: left_col * width,
+        topRow: top_row * height,
+        rightCol: width - right_col * width,
+        bottomRow: height - bottom_row * height,
+      });
+    });
+    this.setState({ boxes: boxes });
+  };
 
   onInputChange = (event) => {
     this.setState({ input: event.target.value });
@@ -570,7 +590,6 @@ class App extends React.Component {
         },
       ],
     });
-
     const requestOptions = {
       method: "POST",
       headers: {
@@ -585,7 +604,7 @@ class App extends React.Component {
       requestOptions
     )
       .then((response) => response.text())
-      .then((result) => console.log(JSON.parse(result, null, 2).outputs[0].data.regions[0].region_info.bounding_box))
+      .then((result) => this.calculateFaceLocation(JSON.parse(result, null, 2).outputs[0].data))
       .catch((error) => console.log("error", error));
   };
 
@@ -595,9 +614,16 @@ class App extends React.Component {
         <Particles className="Particles" id="tsparticles" options={particlesOptions} />
         <Header />
         <div className="PushContent"></div>
-        <Rank />
-        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-        <FaceRecognition imageUrl={this.state.imageUrl} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} boxes={this.state.boxes} imageUrl={this.state.imageUrl} />
+            }
+          />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
       </div>
     );
   }
