@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
 
-const ImageLinkForm = () => {
+const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
   return (
     <div className="ImageLinkForm">
       <p>
@@ -10,8 +10,8 @@ const ImageLinkForm = () => {
         Give it a try
       </p>
       <div className="Form">
-        <input type="text" />
-        <button>
+        <input onChange={onInputChange} type="text" placeholder="Insert image URL" />
+        <button onClick={onButtonSubmit}>
           <span>Detect</span>
         </button>
       </div>
