@@ -32,8 +32,8 @@
       height: 100%;
       border-bottom: 5px solid transparent;
       transition: all 300ms ease-out;
-      width: 100px;
-      &:first-child {
+      width: 70px;
+      &:not(:last-child) {
         margin-right: 40px;
       }
       &:hover {

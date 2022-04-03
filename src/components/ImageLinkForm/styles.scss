@@ -53,10 +53,10 @@
         font-weight: 500;
         font-size: 20px;
       }
-    }
-    button:hover {
-      background: linear-gradient(-90deg, #1a66b8, #953cdc);
-      border: none;
+      &:hover {
+        background: linear-gradient(-90deg, #1a66b8, #953cdc);
+        border: none;
+      }
     }
   }
 }

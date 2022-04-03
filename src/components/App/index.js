@@ -559,7 +559,7 @@ class App extends React.Component {
     console.log(data.regions);
     data.regions.map((region) => {
       const { top_row, left_col, bottom_row, right_col } = region.region_info.bounding_box;
-      boxes.push({
+      return boxes.push({
         leftCol: left_col * width,
         topRow: top_row * height,
         rightCol: width - right_col * width,

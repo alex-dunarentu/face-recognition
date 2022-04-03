@@ -10,6 +10,9 @@ const Header = () => {
         <Logo />
         <div className="Navigation">
           <div className="NavigationOption">
+            <Link to="/">Home</Link>
+          </div>
+          <div className="NavigationOption">
             <Link to="/sign-in">Sign In</Link>
           </div>
           <div className="NavigationOption">

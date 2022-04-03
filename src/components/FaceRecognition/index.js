@@ -6,7 +6,7 @@ const FaceRecognition = ({ imageUrl, boxes }) => {
   return (
     <div className="FaceRecognition">
       <div className="FaceRecognitionWrapper">
-        <img id="input-image" src={imageUrl} alt="Uploaded image" />
+        <img id="input-image" src={imageUrl} alt="Uploaded content" />
         {boxes.map((box, index) => (
           <div key={index} className="BoundingBox" style={{ left: box.leftCol, right: box.rightCol, top: box.topRow, bottom: box.bottomRow }}></div>
         ))}
