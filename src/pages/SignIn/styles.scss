@@ -4,6 +4,7 @@
   border: 1px solid #c4c4c4;
   padding: 24px;
   border-radius: 5px;
+  backdrop-filter: saturate(180%) blur(5px);
   h1 {
     margin-bottom: 20px;
   }
