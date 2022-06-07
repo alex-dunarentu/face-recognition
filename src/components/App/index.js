@@ -16,8 +16,7 @@ const particlesOptions = {
   interactivity: {
     events: {
       onClick: {
-        enable: true,
-        mode: "push",
+        enable: false,
       },
       onHover: {
         enable: true,
@@ -28,10 +27,6 @@ const particlesOptions = {
     modes: {
       push: {
         quantity: 4,
-      },
-      repulse: {
-        distance: 200,
-        duration: 0.4,
       },
     },
   },
@@ -47,7 +42,7 @@ const particlesOptions = {
       width: 1,
     },
     collisions: {
-      enable: true,
+      enable: false,
     },
     move: {
       direction: "none",
@@ -56,7 +51,7 @@ const particlesOptions = {
         default: "bounce",
       },
       random: false,
-      speed: 4,
+      speed: 5,
       straight: false,
     },
     number: {
@@ -78,6 +73,12 @@ const particlesOptions = {
   },
   detectRetina: true,
 };
+const particlesInit = async (main) => {
+  await loadFull(main);
+};
+const particlesLoaded = (container) => {
+  console.log(container);
+};
 
 class App extends React.Component {
   constructor() {
@@ -86,20 +87,54 @@ class App extends React.Component {
       input: "",
       imageUrl: "",
       boxes: [],
+      user: {
+        id: "",
+        name: "Guest",
+        email: "",
+        entries: 0,
+        joined: "",
+      },
     };
   }
-  particlesInit = async (main) => {
-    console.log(main);
 
-    // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(main);
+  loadUser = (user) => {
+    const { id, name, email, entries, joined } = user;
+    this.setState({ input: "", imageUrl: "", boxes: [], user: { id, name, email, entries, joined } });
   };
 
-  particlesLoaded = (container) => {
-    console.log(container);
+  increaseEntries = async () => {
+    const requestOptions = {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: this.state.user.id,
+      }),
+    };
+    try {
+      if (this.state.user.id) {
+        const data = await fetch("http://localhost:3000/image", requestOptions);
+        const response = await data.json();
+        if (response.status !== "not found") {
+          this.setState({
+            user: {
+              ...this.state.user,
+              entries: response.entries,
+            },
+          });
+        }
+      } else {
+        this.setState({
+          user: {
+            ...this.state.user,
+            entries: this.state.user.entries + 1,
+          },
+        });
+      }
+    } catch (error) {
+      console.log("Error getting entries", error);
+    }
   };
+
   calculateFaceLocation = (data) => {
     const image = document.getElementById("input-image");
     const boxes = [];
@@ -124,38 +159,21 @@ class App extends React.Component {
 
   onButtonSubmit = async () => {
     if (this.state.input !== "") {
+      this.setState({ imageUrl: this.state.input });
       const requestOptions = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Key ${process.env.REACT_APP_CLARIFAI_PERSONAL_TOKEN}`,
-        },
-        body: JSON.stringify({
-          user_app_id: {
-            user_id: process.env.REACT_APP_CLARIFAI_USER_ID,
-            app_id: process.env.REACT_APP_CLARIFAI_APP_ID,
-          },
-          inputs: [
-            {
-              data: {
-                image: {
-                  url: this.state.input,
-                },
-              },
-            },
-          ],
-        }),
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input: this.state.input }),
       };
-      const data = await fetch(
-        `https://api.clarifai.com/v2/models/${process.env.REACT_APP_CLARIFAI_MODEL_ID}/versions/${process.env.REACT_APP_CLARIFAI_VERSION_ID}/outputs`,
-        requestOptions
-      );
-      const response = await data.json();
-      if (response.status.code !== 10000) {
-        console.log("No image detected at URL");
-      } else {
-        this.setState({ imageUrl: this.state.input });
-        this.calculateFaceLocation(response.outputs[0].data);
+      try {
+        const data = await fetch("http://localhost:3000/imageurl", requestOptions);
+        const response = await data.json();
+        if (response.status === "success") {
+          this.calculateFaceLocation(response.data.outputs[0].data);
+          this.increaseEntries();
+        }
+      } catch (error) {
+        console.log("Error submitting", error);
       }
     }
   };
@@ -163,18 +181,24 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Particles className="Particles" id="tsparticles" options={particlesOptions} />
-        <Header />
+        <Particles className="Particles" id="tsparticles" options={particlesOptions} init={particlesInit} loaded={particlesLoaded} />
+        <Header user={this.state.user} loadUser={this.loadUser} />
         <div className="PushContent"></div>
         <Routes>
           <Route
             path="/"
             element={
-              <Home onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} boxes={this.state.boxes} imageUrl={this.state.imageUrl} />
+              <Home
+                user={this.state.user}
+                onInputChange={this.onInputChange}
+                onButtonSubmit={this.onButtonSubmit}
+                boxes={this.state.boxes}
+                imageUrl={this.state.imageUrl}
+              />
             }
           />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/sign-in" element={<SignIn loadUser={this.loadUser} />} />
+          <Route path="/register" element={<Register loadUser={this.loadUser} />} />
         </Routes>
       </div>
     );

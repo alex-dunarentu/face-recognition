@@ -1,16 +1,36 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import "./styles.scss";
 
-const Register = () => {
+const Register = ({ loadUser }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registered, setRegistered] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const requestOptions = {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+    };
+
     console.log("name ", name);
     console.log("Email ", email);
     console.log("Password ", password);
+
+    const data = await fetch(`http://localhost:3000/register`, requestOptions);
+    const response = await data.json();
+    if (response.status === "success") {
+      console.log(response.user);
+      loadUser(response.user);
+      setRegistered(true);
+    }
   };
 
   return (
@@ -43,6 +63,7 @@ const Register = () => {
           </button>
         </div>
       </form>
+      {registered ? <Navigate to="/" /> : ""}
     </div>
   );
 };
