@@ -21,7 +21,7 @@ const SignIn = ({ loadUser }) => {
     console.log("Email ", email);
     console.log("Password ", password);
 
-    const data = await fetch(`http://localhost:3000/signin`, requestOptions);
+    const data = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/signin`, requestOptions);
     const response = await data.json();
 
     if (response.status === "success") {

@@ -24,7 +24,7 @@ const Register = ({ loadUser }) => {
     console.log("Email ", email);
     console.log("Password ", password);
 
-    const data = await fetch(`http://localhost:3000/register`, requestOptions);
+    const data = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/register`, requestOptions);
     const response = await data.json();
     if (response.status === "success") {
       console.log(response.user);

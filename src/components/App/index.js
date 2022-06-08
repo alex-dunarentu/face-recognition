@@ -112,7 +112,7 @@ class App extends React.Component {
     };
     try {
       if (this.state.user.id) {
-        const data = await fetch("http://localhost:3000/image", requestOptions);
+        const data = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/image`, requestOptions);
         const response = await data.json();
         if (response.status !== "not found") {
           this.setState({
@@ -166,7 +166,7 @@ class App extends React.Component {
         body: JSON.stringify({ input: this.state.input }),
       };
       try {
-        const data = await fetch("http://localhost:3000/imageurl", requestOptions);
+        const data = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/imageurl`, requestOptions);
         const response = await data.json();
         if (response.status === "success") {
           this.calculateFaceLocation(response.data.outputs[0].data);
