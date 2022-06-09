@@ -1,13 +1,11 @@
 import React from "react";
-import { ImageLinkForm, Rank, FaceRecognition } from "../../components";
 import "./styles.scss";
 
-const Home = ({ onInputChange, onButtonSubmit, boxes, imageUrl, user }) => {
+const Home = () => {
   return (
     <div className="Home">
-      <Rank user={user} />
-      <ImageLinkForm onInputChange={onInputChange} onButtonSubmit={onButtonSubmit} />
-      <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
+      <h1>Face recognition</h1>
+      <p>Detect and locate human faces within an image from any angle, with the AI Face Detection Model from the leader in Computer Vision, Clarifai, which returns high-precision face bounding boxes.</p>
     </div>
   );
 };

@@ -12,10 +12,18 @@ const Header = ({ user, loadUser }) => {
           <Link className="NavigationOption" to="/">
             Home
           </Link>
+          <Link className="NavigationOption" to="/detect">
+            Detect
+          </Link>
           {user.id ? (
-            <Link onClick={() => loadUser({ id: "", name: "Guest", email: "", entries: 0, joined: "" })} className="NavigationOption" to="/sign-in">
-              Sign Out
-            </Link>
+            <>
+              <Link className="NavigationOption" to={`/profile/${user.id}`}>
+                Profile
+              </Link>
+              <Link onClick={() => loadUser({ id: "", name: "Guest", email: "", entries: 0, joined: "" })} className="NavigationOption" to="/sign-in">
+                Sign Out
+              </Link>
+            </>
           ) : (
             <>
               <Link className="NavigationOption" to="/sign-in">

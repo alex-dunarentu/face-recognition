@@ -1,84 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-import { Home, Register, SignIn } from "../../pages";
+import { Home, Register, SignIn, Detect } from "../../pages";
 import Header from "../Header";
-
-const particlesOptions = {
-  fullScreen: false,
-  background: {
-    color: {
-      value: "#000000",
-    },
-  },
-  fpsLimit: 120,
-  interactivity: {
-    events: {
-      onClick: {
-        enable: false,
-      },
-      onHover: {
-        enable: true,
-        mode: "repulse",
-      },
-      resize: true,
-    },
-    modes: {
-      push: {
-        quantity: 4,
-      },
-    },
-  },
-  particles: {
-    color: {
-      value: "#ffffff",
-    },
-    links: {
-      color: "#ffffff",
-      distance: 150,
-      enable: true,
-      opacity: 0.5,
-      width: 1,
-    },
-    collisions: {
-      enable: false,
-    },
-    move: {
-      direction: "none",
-      enable: true,
-      outModes: {
-        default: "bounce",
-      },
-      random: false,
-      speed: 5,
-      straight: false,
-    },
-    number: {
-      density: {
-        enable: true,
-        area: 800,
-      },
-      value: 80,
-    },
-    opacity: {
-      value: 0.5,
-    },
-    shape: {
-      type: "circle",
-    },
-    size: {
-      value: { min: 1, max: 5 },
-    },
-  },
-  detectRetina: true,
-};
-const particlesInit = async (main) => {
-  await loadFull(main);
-};
-const particlesLoaded = (container) => {
-  console.log(container);
-};
+import Background from "../Background";
 
 class App extends React.Component {
   constructor() {
@@ -181,14 +105,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Particles className="Particles" id="tsparticles" options={particlesOptions} init={particlesInit} loaded={particlesLoaded} />
+        <Background />
         <Header user={this.state.user} loadUser={this.loadUser} />
         <div className="PushContent"></div>
         <Routes>
           <Route
-            path="/"
+            path="/detect"
             element={
-              <Home
+              <Detect
                 user={this.state.user}
                 onInputChange={this.onInputChange}
                 onButtonSubmit={this.onButtonSubmit}
@@ -197,6 +121,7 @@ class App extends React.Component {
               />
             }
           />
+          <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn loadUser={this.loadUser} />} />
           <Route path="/register" element={<Register loadUser={this.loadUser} />} />
         </Routes>
