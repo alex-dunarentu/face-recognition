@@ -5,6 +5,8 @@
   right: 0;
   height: 64px;
   background: transparent;
+  backdrop-filter: blur(5px);
+  background: #0b0c1051;
   padding: 0 24px;
   z-index: 100;
   .HeaderWrapper {

@@ -1,17 +1,71 @@
 .Home {
-  max-width: 1048px;
-  margin: 0 auto;
-  padding: 0 24px;
-  min-height: 100vh;
-  h1 {
+  padding-bottom: 96px;
+  .AppName {
+    font-size: 36px;
     padding-top: 24px;
     text-align: center;
     color: #66fcf1;
   }
-  p {
+  .AppDescription {
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 48px;
     color: #c5c6c7;
     text-align: center;
+  }
+  .Advantages {
+    h2 {
+      padding: 48px 0;
+      text-align: center;
+      color: #66fcf1;
+    }
+    min-height: 400px;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    background: #0b0c1051;
+    margin-top: 96px;
+  }
+}
+.Features {
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  .Feature {
+    width: 225px;
+    p {
+      color: #c5c6c7;
+      text-align: center;
+      margin-top: 24px;
+    }
+    img {
+      margin: 0 auto;
+      height: 150px;
+      width: 150px;
+    }
+  }
+}
+.Description {
+  text-align: center;
+  p {
+    color: #c5c6c7;
+    font-size: 20px;
+    padding-top: 96px;
+    text-align: center;
+  }
+  .TryNow {
+    margin-top: 24px;
+    display: inline-block;
+    border: 2px solid #66fcf1;
+    border-radius: 5px;
+    padding: 10px 24px;
+    background: transparent;
+    backdrop-filter: blur(5px);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 150ms ease-out;
+    &:hover {
+      box-shadow: #45a29e 0px 0px 15px;
+    }
   }
 }

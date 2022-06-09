@@ -32,8 +32,10 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
+  position: relative;
+  padding-bottom: 200px;
   color: white;
-  min-height: 150vh;
+  min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-family: 'Montserrat', sans-serif;

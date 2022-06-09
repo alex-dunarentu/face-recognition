@@ -11,3 +11,8 @@
   left: 0;
   z-index: -1;
 }
+.Container {
+  max-width: 1048px;
+  margin: 0 auto;
+  padding: 0 24px;
+}

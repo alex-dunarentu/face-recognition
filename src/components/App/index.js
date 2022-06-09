@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Home, Register, SignIn, Detect } from "../../pages";
 import Header from "../Header";
 import Background from "../Background";
+import Footer from "../Footer";
 
 class App extends React.Component {
   constructor() {
@@ -125,6 +126,7 @@ class App extends React.Component {
           <Route path="/sign-in" element={<SignIn loadUser={this.loadUser} />} />
           <Route path="/register" element={<Register loadUser={this.loadUser} />} />
         </Routes>
+        <Footer />
       </div>
     );
   }
