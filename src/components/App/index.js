@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Home, Register, SignIn, Detect } from "../../pages";
+import { Home, Register, SignIn, Detect, Profile } from "../../pages";
 import Header from "../Header";
 import Background from "../Background";
 import Footer from "../Footer";
@@ -9,12 +9,13 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      isLoading: false,
       input: "",
       imageUrl: "",
       boxes: [],
       user: {
         id: "",
-        name: "Guest",
+        name: "visitor",
         email: "",
         entries: 0,
         joined: "",
@@ -83,21 +84,24 @@ class App extends React.Component {
   };
 
   onButtonSubmit = async () => {
-    if (this.state.input !== "") {
-      this.setState({ imageUrl: this.state.input });
+    if (this.state.input !== "" && !this.state.isLoading) {
+      this.setState({ imageUrl: this.state.input, boxes: [] });
       const requestOptions = {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ input: this.state.input }),
       };
       try {
+        this.setState({ isLoading: true });
         const data = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/imageurl`, requestOptions);
         const response = await data.json();
         if (response.status === "success") {
+          this.setState({ isLoading: false });
           this.calculateFaceLocation(response.data.outputs[0].data);
           this.increaseEntries();
         }
       } catch (error) {
+        this.setState({ isLoading: false });
         console.log("Error submitting", error);
       }
     }
@@ -117,6 +121,7 @@ class App extends React.Component {
                 user={this.state.user}
                 onInputChange={this.onInputChange}
                 onButtonSubmit={this.onButtonSubmit}
+                isLoading={this.state.isLoading}
                 boxes={this.state.boxes}
                 imageUrl={this.state.imageUrl}
               />
@@ -125,6 +130,7 @@ class App extends React.Component {
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn loadUser={this.loadUser} />} />
           <Route path="/register" element={<Register loadUser={this.loadUser} />} />
+          <Route path="/profile/:id" element={<Profile user={this.state.user} />} />
         </Routes>
         <Footer />
       </div>

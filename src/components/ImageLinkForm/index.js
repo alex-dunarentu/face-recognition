@@ -1,17 +1,16 @@
 import React from "react";
 import "./styles.scss";
 
-const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
+const ImageLinkForm = ({ onInputChange, onButtonSubmit, isLoading }) => {
   return (
     <div className="ImageLinkForm">
-      <p>
-        Magically detect faces in your pictures
-        <br />
-        Give it a try
-      </p>
+      <img className="LogoImage" src="/assets/images/fingerprint.svg" alt="Logo" />
       <div className="Form">
-        <input onChange={onInputChange} type="text" placeholder="Insert image URL" />
-        <button onClick={onButtonSubmit}>
+        <div className="FormGroup">
+          <label>Image URL</label>
+          <input onChange={onInputChange} type="text" />
+        </div>
+        <button onClick={onButtonSubmit} className={isLoading ? "LockButton" : ""}>
           <span>Detect</span>
         </button>
       </div>

@@ -1,17 +1,18 @@
 .Rank {
-  margin-top: 100px;
+  padding-top: 24px;
   display: flex;
   justify-content: center;
   .RankWrapper {
     text-align: center;
-    color: white;
 
     .RankInfo {
-      font-size: 36px;
       font-weight: 500;
+      font-size: 32px;
+      color: #c5c6c7;
     }
     .RankPosition {
-      font-size: 48px;
+      font-size: 36px;
+      color: #66fcf1;
     }
   }
 }

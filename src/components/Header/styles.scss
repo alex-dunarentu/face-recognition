@@ -27,19 +27,19 @@
       font-size: 18px;
       justify-content: center;
       align-items: center;
-      color: #66FCF1;
+      color: #66fcf1;
       background-color: transparent;
       height: 100%;
       border-bottom: 3px solid transparent;
-      transition: all 300ms ease-out;
       width: 70px;
       min-width: fit-content;
       text-decoration: none;
       &:not(:last-child) {
-        margin-right: 20px;
+        margin-right: 24px;
       }
       &:hover {
-        border-bottom: 3px solid #66FCF1;
+        border-bottom-color: #66fcf1;
+        box-shadow: rgba(102, 252, 241, 0.1) 0px 5px, rgba(102, 252, 241, 0.05) 0px 10px;
         cursor: pointer;
       }
     }

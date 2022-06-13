@@ -1,61 +1,61 @@
 .ImageLinkForm {
-  backdrop-filter: saturate(180%) blur(5px);
-  border: 1px solid #c4c4c4;
-  border-radius: 5px;
-  max-width: 70%;
-  margin: 100px auto 0;
+  background-color: #0b0c1051;
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  width: 400px;
+  margin: 48px auto 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
-  height: 500px;
-  padding: 40px;
-
-  & > p {
-    color: white;
-    font-size: 36px;
-    font-weight: 500;
-    text-align: center;
+  padding: 24px;
+  .LogoImage {
+    margin-top: 48px;
+    width: 96px;
+    height: 96px;
+    margin-bottom: 72px;
   }
   .Form {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    label {
+      color: #c5c6c7;
+      margin-bottom: 8px;
+    }
     input {
-      color: white;
-      background-color: black;
-      width: 50%;
-      height: 48px;
-      padding-left: 24px;
-      border-radius: 5px;
-      margin-right: 15px;
-      border: 1px solid #c4c4c4;
+      padding: 6px 0;
+      background-color: transparent;
+      border: none;
       outline: none;
-      font-size: 20px;
-
+      color: #66fcf1;
+      border-bottom: 1px solid #c5c6c7;
+      transition: border-color 1150ms #66fcf1;
+      width: 100%;
       &:focus {
-        border: 1px solid #953cdc;
+        border-color: 1px solid #66fcf1;
       }
     }
     button {
-      cursor: pointer;
-      width: 20%;
-      height: 48px;
-      border: 1px solid #c4c4c4;
-      background-color: black;
-      color: white;
+      margin: 24px auto;
+      display: block;
+      border: 2px solid #66fcf1;
       border-radius: 5px;
+      padding: 10px 24px;
+      background: transparent;
+      backdrop-filter: blur(5px);
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
       transition: all 150ms ease-out;
-      span {
-        display: block;
-        font-weight: 500;
-        font-size: 20px;
-      }
+      cursor: pointer;
       &:hover {
-        background: linear-gradient(-90deg, #1a66b8, #953cdc);
-        border: none;
+        box-shadow: #45a29e 0px 0px 15px;
+      }
+    }
+    .LockButton {
+      border: 2px solid #45a29e;
+      color: #c5c6c7;
+      cursor: wait;
+      &:hover {
+        box-shadow: none;
       }
     }
   }

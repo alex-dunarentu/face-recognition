@@ -6,7 +6,7 @@ const Rank = ({ user }) => {
   return (
     <div className="Rank">
       <div className="RankWrapper">
-        <div className="RankInfo">{user.name}, your current entry count is...</div>
+        <div className="RankInfo">Hello {user.name}, here is your current number of detections:</div>
         <div className="RankPosition">{user.entries}</div>
       </div>
     </div>

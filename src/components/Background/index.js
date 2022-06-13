@@ -3,8 +3,8 @@ import "./styles.scss";
 
 const Background = () => {
   return (
-    <div class="Background">
-      <ul class="Circles">
+    <div className="Background">
+      <ul className="Circles">
         <li></li>
         <li></li>
         <li></li>
