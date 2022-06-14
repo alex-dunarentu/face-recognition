@@ -1,11 +1,16 @@
 .FaceRecognition {
-  max-width: 500px;
+  max-width: fit-content;
   max-height: 500px;
   margin: 48px auto;
   .FaceRecognitionWrapper {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90px;
     img {
       scroll-margin: 112px;
+      max-height: 500px;
     }
     .Hidden {
       display: none;

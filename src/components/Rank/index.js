@@ -2,7 +2,6 @@ import React from "react";
 import "./styles.scss";
 
 const Rank = ({ user }) => {
-  console.log(user);
   return (
     <div className="Rank">
       <div className="RankWrapper">

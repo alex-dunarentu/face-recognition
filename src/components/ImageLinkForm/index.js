@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
 
-const ImageLinkForm = ({ onInputChange, onButtonSubmit, isLoading }) => {
+const ImageLinkForm = ({ onInputChange, onButtonSubmit, isLoading, errorMsg }) => {
   return (
     <div className="ImageLinkForm">
       <img className="LogoImage" src="/assets/images/fingerprint.svg" alt="Logo" />
@@ -13,6 +13,7 @@ const ImageLinkForm = ({ onInputChange, onButtonSubmit, isLoading }) => {
         <button onClick={onButtonSubmit} className={isLoading ? "LockButton" : ""}>
           <span>Detect</span>
         </button>
+        {errorMsg ? <div className="ErrorMsg">{errorMsg}</div> : ""}
       </div>
     </div>
   );

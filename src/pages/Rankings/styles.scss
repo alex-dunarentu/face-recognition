@@ -1,0 +1,90 @@
+.Rankings {
+  h1 {
+    font-size: 36px;
+    padding-top: 24px;
+    text-align: center;
+    color: #66fcf1;
+  }
+  .RanksLoading {
+    margin: 48px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    span {
+      padding-top: 15px;
+      font-weight: 600;
+      color: #66fcf1;
+    }
+  }
+  .RanksLoading:before {
+    -webkit-animation: scan 1s infinite;
+    animation: scan 1s infinite;
+    background: -webkit-gradient(linear, left top, right top, color-stop(20%, #66fcf1), color-stop(20%, transparent), to(transparent)),
+      -webkit-gradient(linear, left bottom, left top, color-stop(20%, #66fcf1), color-stop(20%, transparent), to(transparent));
+    background: linear-gradient(90deg, #66fcf1 20%, transparent 20%, transparent), linear-gradient(0deg, #66fcf1 20%, transparent 20%, transparent);
+    background-size: 50px 50px;
+    border: 5px solid #66fcf1;
+    content: "";
+    height: 50px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 50px;
+  }
+  .RankingsTable {
+    padding: 24px 12px;
+    color: #c5c6c7;
+    margin: 48px auto;
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    background: #0b0c1051;
+    thead {
+      th {
+        padding: 0 12px;
+        text-align: left;
+      }
+    }
+
+    td {
+      padding: 6px 12px;
+      min-width: fit-content;
+    }
+    th {
+      color: #66fcf1;
+    }
+    tbody {
+      tr:hover {
+        color: #66fcf1;
+        cursor: default;
+      }
+    }
+  }
+  .ErrorMsg {
+    margin: 48px auto;
+    text-align: center;
+    color: #ff5733;
+    font-weight: 600;
+  }
+}
+@-webkit-keyframes scan {
+  0% {
+    background-position: -5px 0;
+  }
+  50% {
+    background-position: 40px 0;
+  }
+  100% {
+    background-position: 40px 50px;
+  }
+}
+@keyframes scan {
+  0% {
+    background-position: -5px 0;
+  }
+  50% {
+    background-position: 40px 0;
+  }
+  100% {
+    background-position: 40px 50px;
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Home, Register, SignIn, Detect, Profile } from "../../pages";
+import { Home, Register, SignIn, Detect, Profile, Rankings } from "../../pages";
 import Header from "../Header";
 import Background from "../Background";
 import Footer from "../Footer";
@@ -10,6 +10,7 @@ class App extends React.Component {
     super();
     this.state = {
       isLoading: false,
+      errorMsg: "",
       input: "",
       imageUrl: "",
       boxes: [],
@@ -65,6 +66,10 @@ class App extends React.Component {
     const image = document.getElementById("input-image");
     const boxes = [];
     console.log("data", data);
+    if (Object.keys(data).length === 0) {
+      this.setState({ errorMsg: "No face detected." });
+      return;
+    }
     const { width, height } = image;
 
     data.regions.map((region) => {
@@ -77,14 +82,31 @@ class App extends React.Component {
       });
     });
     this.setState({ boxes: boxes });
+    this.increaseEntries();
   };
 
   onInputChange = (event) => {
     this.setState({ input: event.target.value });
   };
 
+  isValidHttpUrl(string) {
+    let url;
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;
+    }
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
+
   onButtonSubmit = async () => {
-    if (this.state.input !== "" && !this.state.isLoading) {
+    if (this.state.errorMsg) {
+      this.setState({ errorMsg: "" });
+    }
+    if (this.state.imageUrl) {
+      this.setState({ imageUrl: "", boxes: [] });
+    }
+    if (this.isValidHttpUrl(this.state.input) && !this.state.isLoading) {
       this.setState({ imageUrl: this.state.input, boxes: [] });
       const requestOptions = {
         method: "post",
@@ -96,14 +118,15 @@ class App extends React.Component {
         const data = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/imageurl`, requestOptions);
         const response = await data.json();
         if (response.status === "success") {
-          this.setState({ isLoading: false });
+          this.setState({ isLoading: false, errorMsg: "" });
           this.calculateFaceLocation(response.data.outputs[0].data);
-          this.increaseEntries();
         }
       } catch (error) {
-        this.setState({ isLoading: false });
+        this.setState({ isLoading: false, errorMsg: "Error submitting." });
         console.log("Error submitting", error);
       }
+    } else {
+      this.setState({ isLoading: false, errorMsg: "Not a valid HTTP URL." });
     }
   };
 
@@ -114,6 +137,7 @@ class App extends React.Component {
         <Header user={this.state.user} loadUser={this.loadUser} />
         <div className="PushContent"></div>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route
             path="/detect"
             element={
@@ -122,12 +146,13 @@ class App extends React.Component {
                 onInputChange={this.onInputChange}
                 onButtonSubmit={this.onButtonSubmit}
                 isLoading={this.state.isLoading}
+                errorMsg={this.state.errorMsg}
                 boxes={this.state.boxes}
                 imageUrl={this.state.imageUrl}
               />
             }
           />
-          <Route path="/" element={<Home />} />
+          <Route path="/rankings" element={<Rankings />} />
           <Route path="/sign-in" element={<SignIn loadUser={this.loadUser} />} />
           <Route path="/register" element={<Register loadUser={this.loadUser} />} />
           <Route path="/profile/:id" element={<Profile user={this.state.user} />} />

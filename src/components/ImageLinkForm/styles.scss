@@ -26,11 +26,11 @@
       border: none;
       outline: none;
       color: #66fcf1;
-      border-bottom: 1px solid #c5c6c7;
+      border-bottom: 2px solid #c5c6c7;
       transition: border-color 1150ms #66fcf1;
       width: 100%;
       &:focus {
-        border-color: 1px solid #66fcf1;
+        border-color: #66fcf1;
       }
     }
     button {
@@ -58,5 +58,10 @@
         box-shadow: none;
       }
     }
+  }
+  .ErrorMsg {
+    text-align: center;
+    color: #ff5733;
+    font-weight: 500;
   }
 }
