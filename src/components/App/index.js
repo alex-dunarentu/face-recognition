@@ -124,9 +124,12 @@ class App extends React.Component {
         this.setState({ isLoading: true });
         const data = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/imageurl`, requestOptions);
         const response = await data.json();
+        console.log(response);
         if (response.status === "success") {
           this.setState({ isLoading: false, errorMsg: "" });
           this.calculateFaceLocation(response.data.outputs[0].data);
+        } else {
+          this.setState({ isLoading: false, errorMsg: "No image detected at URL." });
         }
       } catch (error) {
         this.setState({ isLoading: false, errorMsg: "Error submitting." });
