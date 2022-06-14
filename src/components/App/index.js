@@ -51,6 +51,10 @@ class App extends React.Component {
               entries: response.entries,
             },
           });
+          localStorage.setItem(
+            "faceRecognitionUser",
+            JSON.stringify({ input: "", imageUrl: "", boxes: [], user: { ...this.state.user, entries: response.entries } })
+          );
         }
       } else {
         this.setState({
