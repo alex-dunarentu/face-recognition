@@ -23,10 +23,13 @@ class App extends React.Component {
       },
     };
   }
-
+  componentDidMount() {
+    this.setState(JSON.parse(localStorage.getItem("faceRecognitionUser")));
+  }
   loadUser = (user) => {
     const { id, name, email, entries, joined } = user;
     this.setState({ input: "", imageUrl: "", boxes: [], user: { id, name, email, entries, joined } });
+    localStorage.setItem("faceRecognitionUser", JSON.stringify({ input: "", imageUrl: "", boxes: [], user: { id, name, email, entries, joined } }));
   };
 
   increaseEntries = async () => {
