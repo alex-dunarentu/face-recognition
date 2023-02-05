@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Face Recognition
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A react app that allows you to upload images and automatically highlight faces using Clarifai API. The app also includes a Sign In page with login and registration, a profile page to view profile details and face detections, and a rankings page to see users with the most face detections in descending order. 
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+What things you need to install the software and how to install them
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js 
+- npm 
 
-### `npm test`
+### Installing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository to your local machine
 
-### `npm run build`
+```bash
+git clone https://github.com/alex-dunarentu/face-recognition.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Change into the project directory
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+cd face-recognition
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install the dependencies
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Create a .env file at the root level
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+REACT_APP_API_ENDPOINT = http://localhost:3000
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. Start the app
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+The backend repo (`face-detection-api`) is private due to security reasons, you can only preview the website on [heroku](https://alex-duna-face-recognition.herokuapp.com/).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Built With
 
-### Code Splitting
+- [React](https://reactjs.org/) - The frontend framework used
+- [Node.js](https://nodejs.org/) - The backend framework used
+- [Express.js](https://expressjs.com/) - Node.js web application framework
+- [Postgres](https://www.postgresql.org/) - The database used
+- [Clarifai API](https://www.clarifai.com/) - Used for face recognition
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Frontend Dependencies
 
-### Analyzing the Bundle Size
+- react: ^18.0.0
+- react-dom: ^18.0.0
+- react-router-dom: ^6.3.0
+- react-scripts: ^5.0.0
+- sass: ^1.49.11
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Backend Dependencies
 
-### Making a Progressive Web App
+- bcrypt: ^5.0.1
+- body-parser: ^1.20.0
+- clarifai: ^2.9.1
+- cors: ^2.8.5
+- dotenv: ^16.0.1
+- express: ^4.18.1
+- knex: ^2.1.0
+- pg: ^8.7.3
+- nodemon: ^2.0.16
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Author
 
-### Advanced Configuration
+[Dunărențu Alexandru Nicolae](https://www.linkedin.com/in/alexandru-nicolae-dunarentu/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
